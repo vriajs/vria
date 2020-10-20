@@ -1,11 +1,10 @@
 {
   "name": "vria",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A Web-based Framework for Creating Immersive Analytics Experiences",
   "author": "PButcher",
   "license": "MIT",
   "repository": "https://github.com/vriajs/vria/",
-  "main": "dist/vria.js",
   "module": "dist/vria.modern.js",
   "source": "src/index.js",
   "engines": {
@@ -15,8 +14,8 @@
     "url": "https://github.com/vriajs/vria/issues"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "microbundle-crl --no-compress --format modern",
+    "start": "microbundle-crl watch --no-compress --format modern",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
