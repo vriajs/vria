@@ -1,18 +1,12 @@
 ![VRIA GitHub Teaser](https://pbutcher.uk/files/vria/img/vria-github-teaser.png)
 
-<p style="text-align: center">
-  <img width="200" height="82" src="https://pbutcher.uk/files/vria/img/vria-github-logo.png">
-</p>
-<p style="text-align: center;">
-  <strong>VRIA</strong><br>
-  <span>A Web-Based Framework for Creating Immersive Analytics Experiences</span>
-</p>
-
 ---
+
+<img align="right" width="200" height="82" src="https://pbutcher.uk/files/vria/img/vria-github-logo.png">
 
 # VRIA
 
-[![NPM](https://img.shields.io/npm/v/vria.svg)](https://www.npmjs.com/package/vria)
+[![NPM](https://img.shields.io/npm/v/vria.svg?color=blue)](https://www.npmjs.com/package/vria) [![LICENSE](https://img.shields.io/github/license/vriajs/vria?color=blue)](https://github.com/vriajs/vria/blob/master/LICENSE)
 
 A Web-Based Framework for Creating Immersive Analytics Experiences
 
@@ -38,6 +32,7 @@ Try it in your browser: https://vriajs.github.io/vria
 - [VRIA Builder](#vria-builder)
 - [VRIA Boilerplate](#vria-boilerplate)
 - [Team](#team)
+- [Publications](#publications)
 - [Citing VRIA](#citing-vria)
 - [License](#license)
 
