@@ -1,0 +1,112 @@
+{
+  "view": {
+    "mark": {
+      "bar": {
+        "shape": "box"
+      },
+      "point": {
+        "shape": "sphere",
+        "size": 0.012
+      },
+      "tooltip": {
+        "on": { "content": "data" },
+        "off": false
+      }
+    },
+    "encoding": {
+      "legend": {
+        "type": {
+          "gradient": {
+            "face": "back",
+            "orient": "top-right"
+          },
+          "symbol": {
+            "face": "back",
+            "orient": "left"
+          }
+        },
+        "filter": false,
+        "ticks": true,
+        "tickCount": 2,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "xrotation": 0,
+        "yrotation": 0,
+        "zrotation": 0
+      },
+      "scale": {
+        "range": {
+          "color": {
+            "quantitative": "ramp",
+            "ordinal": "ordinal",
+            "nominal": "category",
+            "temporal": "ramp"
+          },
+          "size": [0, 0.2],
+          "length": [0, 0.1],
+          "shape": ["sphere", "box", "tetrahedron", "torus", "cone"],
+          "shape2d": ["circle", "plane", "triangle", "ring"]
+        },
+        "scheme": {
+          "ramp": "interpolateBlues",
+          "ordinal": "schemeBlues",
+          "category": "schemeSet1"
+        },
+        "zero": true,
+        "paddingInner": 0.25,
+        "paddingOuter": 0.25,
+        "nice": true
+      },
+      "axis": {
+        "titlePadding": 0.2,
+        "filter": false,
+        "face": {
+          "x": "front",
+          "y": "back",
+          "z": "left"
+        },
+        "orient": {
+          "x": "bottom",
+          "y": "left",
+          "z": "bottom"
+        },
+        "ticks": true,
+        "tickCount": 10,
+        "labels": true
+      },
+      "timeUnit": {
+        "year": "YYYY",
+        "quarter": "Qo",
+        "month": "MMMM",
+        "date": "L",
+        "week": "w",
+        "day": "d",
+        "dayofyear": "DDD",
+        "hours": "LT",
+        "minutes": "hh:mm",
+        "seconds": "hh:mm:ss",
+        "milliseconds": "SSSS"
+      }
+    },
+    "titlePadding": 0.1,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "xrotation": 0,
+    "yrotation": 0,
+    "zrotation": 0
+  },
+  "options": {
+    "userHeight": 1.6,
+    "handedness": "both",
+    "selections": false,
+    "multiSelect": false,
+    "cursorColor": "#FFFFFF",
+    "chartColor": "#000000",
+    "selectColor": "#00FF00"
+  }
+}

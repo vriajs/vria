@@ -1,0 +1,48 @@
+{
+  "name": "vria-builder",
+  "homepage": ".",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
+    "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
+    "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
+    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject",
+    "dist": "yarn run build && cp build -r dist"
+  },
+  "dependencies": {
+    "aframe-environment-component": "^2.0.0",
+    "aframe-react": "^4.4.0",
+    "csvtojson": "^2.0.10",
+    "json-parse-better-errors": "^1.0.2",
+    "lodash": "^4.17.20",
+    "papaparse": "^5.3.0",
+    "prismjs": "^1.21.0",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-dropzone": "^11.2.0",
+    "react-fast-compare": "^3.2.0",
+    "react-markdown": "^5.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "link:../node_modules/react-scripts",
+    "react-simple-code-editor": "^0.11.0",
+    "react-split-pane": "^0.1.92",
+    "remark-gfm": "^1.0.0",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.1.1",
+    "use-debounce": "^5.0.1",
+    "vria": "link:.."
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

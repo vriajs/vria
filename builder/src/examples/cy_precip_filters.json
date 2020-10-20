@@ -1,0 +1,28 @@
+{
+  "title": "Monthly Rainfall in Wales in 2018 (Millimetres)",
+  "data": {
+    "values": [
+      { "Month": "January", "Rainfall": 188.9 },
+      { "Month": "February", "Rainfall": 79.9 },
+      { "Month": "March", "Rainfall": 151.4 },
+      { "Month": "April", "Rainfall": 120.2 },
+      { "Month": "May", "Rainfall": 64.3 },
+      { "Month": "June", "Rainfall": 19 },
+      { "Month": "July", "Rainfall": 16.4 },
+      { "Month": "August", "Rainfall": 101.5 },
+      { "Month": "September", "Rainfall": 144.6 },
+      { "Month": "October", "Rainfall": 135.8 },
+      { "Month": "November", "Rainfall": 169.8 },
+      { "Month": "December", "Rainfall": 201.4 }
+    ]
+  },
+  "mark": { "type": "bar", "tooltip": { "content": "data" } },
+  "encoding": {
+    "x": { "field": "Month", "type": "nominal" },
+    "y": {
+      "axis": { "filter": true },
+      "field": "Rainfall",
+      "type": "quantitative"
+    }
+  }
+}

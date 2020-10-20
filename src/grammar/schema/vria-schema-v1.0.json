@@ -1,0 +1,304 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VRIA JSON Schema v1.0",
+  "description": "JSON Schema for validating VRIA vis-config files",
+  "type": "object",
+  "properties": {
+    "title": { "$ref": "#title" },
+    "titlePadding": { "$ref": "#titlePadding" },
+    "data": { "$ref": "#data" },
+    "mark": { "$ref": "#mark" },
+    "encoding": { "$ref": "#encoding" },
+    "views": { "$ref": "#views" },
+    "width": { "$ref": "#width" },
+    "height": { "$ref": "#height" },
+    "depth": { "$ref": "#depth" },
+    "x": { "$ref": "#xposition" },
+    "y": { "$ref": "#yposition" },
+    "z": { "$ref": "#zposition" },
+    "xrotation": { "$ref": "#xrotation" },
+    "yrotation": { "$ref": "#yrotation" },
+    "zrotation": { "$ref": "#zrotation" },
+    "xrot": { "$ref": "#xrotation" },
+    "yrot": { "$ref": "#yrotation" },
+    "zrot": { "$ref": "#zrotation" }
+  },
+  "required": ["data", "title"],
+  "oneOf": [{ "required": ["views"] }, { "required": ["mark", "encoding"] }],
+  "definitions": {
+    "title": {
+      "$id": "#title",
+      "type": ["string", "boolean"]
+    },
+    "titlePadding": {
+      "$id": "#titlePadding",
+      "type": "number"
+    },
+    "data": {
+      "$id": "#data",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "values": { "type": "array" }
+      },
+      "oneOf": [{ "required": ["url"] }, { "required": ["values"] }]
+    },
+    "mark": {
+      "$id": "#mark",
+      "anyOf": [
+        { "$ref": "#markType" },
+        {
+          "type": "object",
+          "properties": {
+            "type": { "$ref": "#markType" },
+            "shape": { "type": "string" },
+            "tooltip": { "$ref": "#tooltip" }
+          },
+          "required": ["type"]
+        }
+      ]
+    },
+    "markType": {
+      "$id": "#markType",
+      "type": "string",
+      "enum": ["point", "bar"]
+    },
+    "tooltip": {
+      "$id": "#tooltip",
+      "anyOf": [
+        { "type": "boolean" },
+        {
+          "type": "object",
+          "properties": {
+            "content": { "type": ["string", "array"] }
+          },
+          "required": ["content"]
+        }
+      ]
+    },
+    "encoding": {
+      "$id": "#encoding",
+      "type": "object",
+      "properties": {
+        "x": { "$ref": "#channel" },
+        "y": { "$ref": "#channel" },
+        "z": { "$ref": "#channel" },
+        "xoffset": { "$ref": "#channel" },
+        "yoffset": { "$ref": "#channel" },
+        "zoffset": { "$ref": "#channel" },
+        "width": { "$ref": "#channel" },
+        "height": { "$ref": "#channel" },
+        "depth": { "$ref": "#channel" },
+        "xrotation": { "$ref": "#channel" },
+        "yrotation": { "$ref": "#channel" },
+        "zrotation": { "$ref": "#channel" },
+        "xrot": { "$ref": "#channel" },
+        "yrot": { "$ref": "#channel" },
+        "zrot": { "$ref": "#channel" },
+        "size": { "$ref": "#channel" },
+        "color": { "$ref": "#channel" },
+        "opacity": { "$ref": "#channel" },
+        "length": { "$ref": "#channel" },
+        "shape": { "$ref": "#channel" }
+      }
+    },
+    "channel": {
+      "$id": "#channel",
+      "type": "object",
+      "properties": {
+        "field": { "type": "string" },
+        "timeUnit": { "type": "string" },
+        "numberFormat": { "$ref": "#numberFormat" },
+        "type": {
+          "type": "string",
+          "enum": ["nominal", "ordinal", "quantitative", "temporal"]
+        },
+        "value": { "type": ["number", "string"] },
+        "scale": { "$ref": "#scale" },
+        "axis": { "$ref": "#axis" },
+        "legend": { "$ref": "#legend" }
+      },
+      "oneOf": [{ "required": ["type", "field"] }, { "required": ["value"] }]
+    },
+    "scale": {
+      "$id": "#scale",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["linear", "sequential", "band"]
+        },
+        "domain": {
+          "type": "array",
+          "items": { "type": ["number", "string"] }
+        },
+        "range": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["ramp", "ordinal", "category"]
+            },
+            {
+              "type": "array",
+              "items": { "type": ["number", "string"] }
+            }
+          ]
+        },
+        "scheme": { "type": ["string", "array"] },
+        "zero": { "type": "boolean" },
+        "nice": { "type": "boolean" },
+        "paddingInner": { "type": "number" },
+        "paddingOuter": { "type": "number" }
+      }
+    },
+    "axis": {
+      "$id": "#axis",
+      "oneOf": [
+        { "type": "boolean" },
+        {
+          "type": "object",
+          "properties": {
+            "title": { "$ref": "#title" },
+            "titlePadding": { "$ref": "#titlePadding" },
+            "filter": { "$ref": "#filter" },
+            "face": { "$ref": "#face" },
+            "orient": { "$ref": "#orient" },
+            "ticks": { "$ref": "#ticks" },
+            "tickCount": { "$ref": "#tickCount" },
+            "labels": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "legend": {
+      "$id": "#legend",
+      "oneOf": [
+        { "type": "boolean" },
+        {
+          "type": "object",
+          "properties": {
+            "title": { "$ref": "#title" },
+            "filter": { "$ref": "#filter" },
+            "type": { "type": "string" },
+            "face": { "$ref": "#face" },
+            "numberFormat": { "$ref": "#numberFormat" },
+            "orient": { "$ref": "#orient" },
+            "x": { "$ref": "#xposition" },
+            "y": { "$ref": "#yposition" },
+            "z": { "$ref": "#zposition" },
+            "xrotation": { "$ref": "#xrotation" },
+            "yrotation": { "$ref": "#yrotation" },
+            "zrotation": { "$ref": "#zrotation" },
+            "xrot": { "$ref": "#xrotation" },
+            "yrot": { "$ref": "#yrotation" },
+            "zrot": { "$ref": "#zrotation" }
+          }
+        }
+      ]
+    },
+    "views": {
+      "$id": "#views",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "$ref": "#title" },
+          "titlePadding": { "$ref": "#titlePadding" },
+          "mark": { "$ref": "#mark" },
+          "encoding": { "$ref": "#encoding" },
+          "width": { "$ref": "#width" },
+          "height": { "$ref": "#height" },
+          "depth": { "$ref": "#depth" },
+          "x": { "$ref": "#xposition" },
+          "y": { "$ref": "#yposition" },
+          "z": { "$ref": "#zposition" },
+          "xrotation": { "$ref": "#xrotation" },
+          "yrotation": { "$ref": "#yrotation" },
+          "zrotation": { "$ref": "#zrotation" },
+          "xrot": { "$ref": "#xrotation" },
+          "yrot": { "$ref": "#yrotation" },
+          "zrot": { "$ref": "#zrotation" }
+        },
+        "required": ["mark", "encoding"]
+      }
+    },
+    "filter": {
+      "$id": "#filter",
+      "type": "boolean"
+    },
+    "face": {
+      "$id": "#face",
+      "type": "string",
+      "enum": ["front", "back", "top", "bottom", "left", "right"]
+    },
+    "orient": {
+      "$id": "#orient",
+      "type": "string",
+      "enum": [
+        "top-left",
+        "top",
+        "top-right",
+        "right",
+        "bottom-right",
+        "bottom",
+        "bottom-left",
+        "left",
+        "middle"
+      ]
+    },
+    "ticks": {
+      "$id": "#ticks",
+      "type": "boolean"
+    },
+    "tickCount": {
+      "$id": "#tickCount",
+      "type": "number",
+      "minimum": 2
+    },
+    "numberFormat": {
+      "$id": "#numberFormat",
+      "type": "string"
+    },
+    "values": {
+      "$id": "#values",
+      "type": "array",
+      "items": { "type": ["string", "number"] }
+    },
+    "width": {
+      "$id": "#width",
+      "type": "number"
+    },
+    "height": {
+      "$id": "#height",
+      "type": "number"
+    },
+    "depth": {
+      "$id": "#depth",
+      "type": "number"
+    },
+    "xposition": {
+      "$id": "#xposition",
+      "type": "number"
+    },
+    "yposition": {
+      "$id": "#yposition",
+      "type": "number"
+    },
+    "zposition": {
+      "$id": "#zposition",
+      "type": "number"
+    },
+    "xrotation": {
+      "$id": "#xrotation",
+      "type": "number"
+    },
+    "yrotation": {
+      "$id": "#yrotation",
+      "type": "number"
+    },
+    "zrotation": {
+      "$id": "#zrotation",
+      "type": "number"
+    }
+  }
+}
