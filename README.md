@@ -19,7 +19,7 @@ Try it in your browser: https://vriajs.github.io/vria
   - [What's in the package?](#whats-in-the-package)
 - [Basic usage](#basic-usage)
 - [VRIA `aframe-react` Component and API](#vria-aframe-react-component-and-api)
-  - [Props Reference](#props-reference)
+  - [Props API Reference](#props-api-reference)
     - [config](#config)
     - [onConfigParsed](#onconfigparsed)
     - [additionalFilters](#additionalfilters)
@@ -29,11 +29,12 @@ Try it in your browser: https://vriajs.github.io/vria
     - [setSelection](#setselection)
     - [customMarks](#custommarks)
     - [options](#options)
+  - [Config Validation](#config-validation)
 - [VRIA Builder](#vria-builder)
 - [VRIA Boilerplate](#vria-boilerplate)
 - [Team](#team)
 - [Publications](#publications)
-- [Citing VRIA](#citing-vria)
+  - [Citation](#citation)
 - [License](#license)
 
 ---
@@ -62,17 +63,20 @@ VRIA's NodeJS module is separated into three parts:
 
 To get started with VRIA, you can experiment with the hosted version of the VRIA Builder online: https://vriajs.github.io/vria
 
-To add VRIA to a new or existing project you will need [NodeJS](https://nodejs.org) (>= v10.0). You will also need to install [`react`](https://npmjs.org/package/react) and [`react-dom`](https://npmjs.org/package/react-dom) if you haven't already. The easiest way to get started with a new React project is via [create-react-app](https://create-react-app.dev/docs/getting-started/) _(recommended)_.
+To add VRIA to a new or existing project you will need:
 
-Alternatively, you can add React later and start off by installing VRIA on its own and using the `boilerplate/` directory to create your first VRIA app. [[docs](#vria-boilerplate)]
+- [NodeJS](https://nodejs.org) (>= v10.0).
+- You will also need to install [`react`](https://npmjs.org/package/react) and [`react-dom`](https://npmjs.org/package/react-dom) if you haven't already. The easiest way to get started with a new React project is via [create-react-app](https://create-react-app.dev/docs/getting-started/) _(recommended)_.
+  - Alternatively, you can add React later and start off by installing VRIA on its own by cloning this repository and using the `boilerplate/` directory to create your first VRIA app [[docs](#vria-boilerplate)]. The VRIA Builder is also available to install locally in the `builder/` directory [[docs](#vria-builder)].
+- Finally, you will need to include the A-Frame library script in the `<head>` of your `index.html` file:
 
-The VRIA builder is also available to install locally in the `builder/` directory. [[docs](#vria-builder)]
-
-Whichever route you choose to take, these next steps remain the same.
+```html
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+```
 
 ### Installing VRIA
 
-You can install VRIA with [Yarn](https://yarnpkg.com) or [NPM](https://npmjs.org):
+You can add VRIA to a new or existing application by installing it with [Yarn](https://yarnpkg.com) or [NPM](https://npmjs.org):
 
 ```bash
 yarn add vria
@@ -84,13 +88,13 @@ or
 npm install vria
 ```
 
-This will add VRIA to your `package.json` file.
+You can then include VRIA in your project:
 
-If you cloned this repository instead, you can install VRIA by running either `yarn install` or `npm install`.
+```jsx
+import VRIA from 'vria';
+```
 
-Next you will need to start the development server.
-
-### Run development server
+### Run the development server
 
 If you are using `create-react-app` you can run either `yarn start` or `npm start` to start the development server.
 
@@ -132,7 +136,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ### Create a production build
 
-You can build your app for production to the `build/` directory by running either `yarn run build` or `npm run build`.
+You can build your app for production to the `build/` directory by running either `yarn build` or `npm run build`.
 
 ---
 
@@ -164,7 +168,7 @@ In the above example the `config` prop is used to load a VRIA vis-config as JSON
 
 VRIA exposes a set of props that can be used to integrate a scene with other libraries and user-defined features. For example, additional filters can be added to other features of a multi-variate dataset with user-defined interaction components (e.g. buttons, sliders etc.).
 
-### Props Reference
+### Props API Reference
 
 - [config](#config)
 - [onConfigParsed](#onconfigparsed)
@@ -194,6 +198,17 @@ The `onConfigParsed` prop should be passed a function which will be called whene
 | `dataset`        | _object array_                                                                                  | The parsed dataset                        |
 | `domainMap`      | [_Map()_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) | The state of visualization domain filters |
 | `scales`         | _object array_                                                                                  | Scale functions from each VRIA view       |
+
+Example usage:
+
+```jsx
+<VRIA
+  config={config}
+  onConfigParsed={({ compiledConfig, dataset, domainMap, scales }) => {
+    // Do something once the vis-config is compiled
+  }}
+/>
+```
 
 #### `additionalFilters`
 
@@ -240,6 +255,12 @@ The `onFilter` prop should be passed a function that will be called whenever a f
 This function will be passed a [Map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) containing the current state of all field domains in a VRIA visualization, including any domains that were specified in the [`additionalFilters`](#additionalFilters) prop.
 
 This prop can be used to send the state of VRIA filters across the network in a multi-user environment, or for use in other parts of your application.
+
+| Argument    | Type                                                                                            | Description                                              |
+| ----------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `domainMap` | [_Map()_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) | Current state of visualization filters by field=>domain. |
+
+Example usage:
 
 ```jsx
 <VRIA
@@ -318,7 +339,7 @@ const customMark = (props) => (
 This example makes use of the dimension and color encoding channels, but every encoding channel is available to use via props. To include this mark in a visualization, the name of the mark should be used in place of the mark type in the vis-config. More than one custom mark can be used at a time inside the `customMarks` prop object. Here's how the `customMarks` prop would look with our mark definition above.
 
 ```jsx
-<VRIA config={config} customMarks={{ customMark }} />
+<VRIA config={config} customMarks={{ customMark, otherCustomMark }} />
 ```
 
 #### `options`
@@ -347,31 +368,59 @@ For example, to change the `chartColor` to white and `selectColor` to red:
 />
 ```
 
+### Config validation
+
+Although VRIA will validate your vis-config at runtime, sometimes you may wish to valid a VRIA vis-config against the VRIA JSON Schema before passing it to VRIA. To do this you can run it through the validator with the `validateVisConfig` named export:
+
+```jsx
+import { validateVisConfig, schema } from 'vria';
+import config from './config';
+
+// Validate a vis-config
+console.log(validateVisConfig(config));
+```
+
+This example also shows you how to access the VRIA JSON Schema if you wish to do your own validation.
+
+---
+
 ## VRIA Builder
 
 The VRIA Builder: An end-to-end tool for learning and rapidly prototyping immersive Web-based visualizations. It is available online at: https://vriajs.github.io/vria and as part of this package.
 
 To use the VRIA builder locally, follow these instructions:
 
-1. Navigate to `builder/`
-2. Run `yarn install` or `npm install`
-3. Run `yarn start` or `npm start`
+1. Clone or fork the VRIA Git repository
+2. Navigate to `builder/`
+3. Run `yarn install` or `npm install`
+4. Run `yarn start` or `npm start`
 
 The builder is now running at `localhost:3000`
+
+Run `yarn build` or `npm run build` to create a production ready build of the VRIA builder to `builder/build`.
+
+---
 
 ## VRIA Boilerplate
 
 The VRIA Boilerplate is a way to quickly get started with VRIA without starting a new project from scratch. To use the boilerplate application, follow these instructions:
 
-1. Navigate to `boilerplate/`
-2. Run `yarn install` or `npm install`
-3. Run `yarn start` or `npm start`
+1. Clone or fork the VRIA Git repository
+2. Navigate to `boilerplate/`
+3. Run `yarn install` or `npm install`
+4. Run `yarn start` or `npm start`
 
 The boilerplate example is now running at `localhost:3000`
+
+Run `yarn build` or `npm run build` to create a production ready build of your app to `boilerplate/build`.
+
+---
 
 ## Team
 
 VRIA is in ongoing development by the Visualization, Modeling and Graphics Research Group at Bangor University, UK, led by [Peter Butcher](https://twitter.com/pwsbutcher) and [Panagiotis Ritsos](https://twitter.com/ritsos_p).
+
+---
 
 ## Publications
 
@@ -381,7 +430,7 @@ _VRIA: A Web-based Framework for Creating Immersive Analytics Experiences_
 
 Published in: [IEEE Transactions on Visualization and Computer Graphics](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=2945) (Early Access) - Presented virtually at [IEEE VIS 2020](http://ieeevis.org/year/2020/welcome).
 
-## Citing VRIA
+### Citation
 
 ```bib
 @ARTICLE{8954824,
@@ -394,6 +443,8 @@ Published in: [IEEE Transactions on Visualization and Computer Graphics](https:/
   pages={1-1},
 }
 ```
+
+---
 
 ## License
 
