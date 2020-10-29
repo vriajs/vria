@@ -188,7 +188,7 @@ The `config` prop contains a VRIA vis-config as JSON and must be supplied when t
 
 #### `onConfigParsed`
 
-_required_ **[function]**
+_optional_ **[function]**
 
 The `onConfigParsed` prop should be passed a function which will be called whenever VRIA compiles a vis-config update. This function will be passed an object containing the following:
 
