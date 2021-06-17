@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { reducer, initialState, DispatchContext } from './reducer';
 
 import themes from './themes';
@@ -15,7 +15,7 @@ const VRIABuilder = () => {
       <ThemeProvider theme={themes[state.theme]}>
         <GlobalStyle />
         <Wrapper>
-          <Router basename='/vria'>
+          <Router>
             <Header version={state.version} />
             <Main>
               <BuilderPanel

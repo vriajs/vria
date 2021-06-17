@@ -133,9 +133,9 @@ const ViewBuilder = ({ editorConfigJSON, actions, index, viewArray, view }) => {
     'x',
     'y',
     'z',
-    'xrot',
-    'yrot',
-    'zrot',
+    'xrotation',
+    'yrotation',
+    'zrotation',
     'width',
     'height',
     'depth'
@@ -150,9 +150,9 @@ const ViewBuilder = ({ editorConfigJSON, actions, index, viewArray, view }) => {
     'width',
     'height',
     'depth',
-    'xrot',
-    'yrot',
-    'zrot',
+    'xrotation',
+    'yrotation',
+    'zrotation',
     'size',
     'color',
     'opacity',
@@ -160,7 +160,7 @@ const ViewBuilder = ({ editorConfigJSON, actions, index, viewArray, view }) => {
     'shape'
   ];
   const pos = ['x', 'y', 'z'];
-  const rot = ['xrot', 'yrot', 'zrot'];
+  const rot = ['xrotation', 'yrotation', 'zrotation'];
   const dim = ['width', 'height', 'depth'];
   const availableTypes = ['quantitative', 'nominal', 'ordinal', 'temporal'];
   const availableMarkTypes = ['point', 'bar'];
@@ -499,15 +499,10 @@ const ViewBuilder = ({ editorConfigJSON, actions, index, viewArray, view }) => {
 };
 
 const DropDownBuilder = ({ editorConfig, actions }) => {
-  // const [hasViewsArray, setHasViewsArray] = useState(false);
   const c = JSON.parse(editorConfig);
-
-  console.log(c);
 
   if (c.encoding) {
     // Single view - Has encoding
-    console.log(c.encoding);
-
     return (
       <ViewBuilder
         editorConfigJSON={c}
@@ -523,7 +518,6 @@ const DropDownBuilder = ({ editorConfig, actions }) => {
     );
   } else if (c.views) {
     // Multi view - Has views array
-    console.log(c.views);
     return c.views.map((view, i) => (
       <ViewBuilder
         key={`bv${i}`}
@@ -562,9 +556,9 @@ const Builder = ({ editorConfig, actions }) => {
     'x',
     'y',
     'z',
-    'xrot',
-    'yrot',
-    'zrot',
+    'xrotation',
+    'yrotation',
+    'zrotation',
     'width',
     'height',
     'depth'

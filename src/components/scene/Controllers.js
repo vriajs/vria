@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Entity } from 'aframe-react';
 
 /* global AFRAME */
@@ -10,7 +10,7 @@ const Controllers = ({ handedness }) => {
     handedness !== 'none'
   ) {
     return (
-      <>
+      <Fragment>
         {handedness === 'both' || handedness === 'left' ? (
           <Entity>
             <Entity
@@ -99,7 +99,7 @@ const Controllers = ({ handedness }) => {
             </Entity>
           </Entity>
         ) : null}
-      </>
+      </Fragment>
     );
   } else {
     return null;

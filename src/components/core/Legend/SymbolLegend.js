@@ -156,6 +156,7 @@ const SymbolLegend = ({
         mark = (
           <Entity
             primitive='a-cone'
+            height='0.02'
             radius-top='0'
             radius-bottom='0.01'
             color={color}
@@ -188,6 +189,9 @@ const SymbolLegend = ({
           <Entity
             primitive='a-torus'
             radius='0.01'
+            radius-tubular='0.001'
+            segments-radial='18'
+            segments-tubular='16'
             color={color}
             position={{
               x:

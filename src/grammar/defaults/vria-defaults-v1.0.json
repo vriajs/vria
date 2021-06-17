@@ -6,7 +6,7 @@
       },
       "point": {
         "shape": "sphere",
-        "size": 0.012
+        "size": 0.02
       },
       "tooltip": {
         "on": { "content": "data" },
@@ -43,6 +43,8 @@
             "nominal": "category",
             "temporal": "ramp"
           },
+          "offset": [0, 0.2],
+          "rotation": [0, 360],
           "size": [0, 0.2],
           "length": [0, 0.1],
           "shape": ["sphere", "box", "tetrahedron", "torus", "cone"],

@@ -1097,7 +1097,7 @@
         "orient": "right",
         "face": "front",
         "filter": true,
-        "yrot": -45
+        "yrotation": -45
       },
       "scale": {
         "scheme": "schemeCategory10"
@@ -1107,6 +1107,6 @@
   "width": 0.6,
   "height": 0.6,
   "depth": 0.6,
-  "yrot": 45,
+  "yrotation": 45,
   "y": 0.2
 }

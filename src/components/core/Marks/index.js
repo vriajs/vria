@@ -212,6 +212,7 @@ const Marks = (props) => {
         attributes.rotation = `${attributes.xrotation || 0} ${
           attributes.yrotation || 0
         } ${attributes.zrotation || 0}`;
+        console.log(attributes.rotation);
 
         // Shape scale
         const shapeScaleMark = attributes.shape ? attributes.shape : null;
@@ -226,7 +227,12 @@ const Marks = (props) => {
                 primitive='a-sphere'
                 className={`interactive vria-mark ${vriaid}`}
                 data-mark={JSON.stringify(row)}
-                radius={radius}
+                radius='0.5'
+                scale={{
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                }}
                 segments-height='9'
                 segments-width='18'
                 color={attributes.color}
@@ -248,9 +254,14 @@ const Marks = (props) => {
                 primitive='a-box'
                 className={`interactive vria-mark ${vriaid}`}
                 data-mark={JSON.stringify(row)}
-                width={attributes.width || radius}
-                height={attributes.height || radius}
-                depth={attributes.depth || radius}
+                scale={{
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                }}
+                width='1'
+                height='1'
+                depth='1'
                 color={attributes.color}
                 initialColor={attributes.color}
                 position={attributes.position}
@@ -270,7 +281,13 @@ const Marks = (props) => {
                 primitive='a-cone'
                 className={`interactive vria-mark ${vriaid}`}
                 data-mark={JSON.stringify(row)}
-                height={attributes.length || attributes.height || radius * 2}
+                // height={attributes.length || attributes.height || radius * 2}
+                height='1'
+                scale={{
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                }}
                 color={attributes.color}
                 initialColor={attributes.color}
                 position={attributes.position}
@@ -278,7 +295,7 @@ const Marks = (props) => {
                 segments-height='9'
                 segments-radial='18'
                 radius-top='0'
-                radius-bottom={radius}
+                radius-bottom='0.5'
                 initialOpacity={attributes.opacity}
                 opacity={attributes.opacity}
                 events={markEvents}
@@ -294,7 +311,12 @@ const Marks = (props) => {
                 primitive='a-tetrahedron'
                 className={`interactive vria-mark ${vriaid}`}
                 data-mark={JSON.stringify(row)}
-                radius={radius}
+                radius='1'
+                scale={{
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                }}
                 color={attributes.color}
                 initialColor={attributes.color}
                 position={attributes.position}
@@ -314,7 +336,15 @@ const Marks = (props) => {
                 primitive='a-torus'
                 className={`interactive vria-mark ${vriaid}`}
                 data-mark={JSON.stringify(row)}
-                radius={radius}
+                radius='0.5'
+                radius-tubular='0.05'
+                scale={{
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                }}
+                segments-radial='18'
+                segments-tubular='16'
                 color={attributes.color}
                 initialColor={attributes.color}
                 position={attributes.position}

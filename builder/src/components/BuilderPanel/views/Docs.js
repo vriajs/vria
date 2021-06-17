@@ -47,7 +47,18 @@ const Docs = () => {
 
   return (
     <StyledDocs>
-      <ReactMarkdown plugins={[gfm]} children={md} />
+      <ReactMarkdown
+        plugins={[gfm]}
+        children={md}
+        linkTarget='_blank'
+        transformLinkUri={(href) => {
+          if (href.includes('https://')) {
+            return href;
+          } else {
+            return `https://github.com/vriajs/vria/blob/master/README.md${href}`;
+          }
+        }}
+      />
     </StyledDocs>
   );
 };

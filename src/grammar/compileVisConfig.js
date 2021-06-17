@@ -608,6 +608,16 @@ function _getRanges(view) {
         case 'shape':
           range = defaults.view.encoding.scale.range.shape;
           break;
+        case 'xrotation':
+        case 'yrotation':
+        case 'zrotation':
+          range = defaults.view.encoding.scale.range.rotation;
+          break;
+        case 'xoffset':
+        case 'yoffset':
+        case 'zoffset':
+          range = defaults.view.encoding.scale.range.offset;
+          break;
         default:
           break;
       }

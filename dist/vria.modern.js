@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useContext, Fragment, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Entity } from 'aframe-react';
 import cloneDeep from 'lodash/cloneDeep';
@@ -1771,7 +1771,7 @@ var view = {
 		},
 		point: {
 			shape: "sphere",
-			size: 0.012
+			size: 0.02
 		},
 		tooltip: {
 			on: {
@@ -1810,6 +1810,14 @@ var view = {
 					nominal: "category",
 					temporal: "ramp"
 				},
+				offset: [
+					0,
+					0.2
+				],
+				rotation: [
+					0,
+					360
+				],
 				size: [
 					0,
 					0.2
@@ -2980,6 +2988,18 @@ function _getRanges(view) {
         case 'shape':
           range = defaults.view.encoding.scale.range.shape;
           break;
+
+        case 'xrotation':
+        case 'yrotation':
+        case 'zrotation':
+          range = defaults.view.encoding.scale.range.rotation;
+          break;
+
+        case 'xoffset':
+        case 'yoffset':
+        case 'zoffset':
+          range = defaults.view.encoding.scale.range.offset;
+          break;
       }
     }
 
@@ -3326,6 +3346,7 @@ const SymbolLegend = ({
       case 'cone':
         mark = /*#__PURE__*/React.createElement(Entity, {
           primitive: "a-cone",
+          height: "0.02",
           "radius-top": "0",
           "radius-bottom": "0.01",
           color: color,
@@ -3354,6 +3375,9 @@ const SymbolLegend = ({
         mark = /*#__PURE__*/React.createElement(Entity, {
           primitive: "a-torus",
           radius: "0.01",
+          "radius-tubular": "0.001",
+          "segments-radial": "18",
+          "segments-tubular": "16",
           color: color,
           position: {
             x: ((_view$encoding$channe5 = view.encoding[channel].legend) === null || _view$encoding$channe5 === void 0 ? void 0 : _view$encoding$channe5.filter) !== false ? -0.04 : -0.08,
@@ -4316,6 +4340,7 @@ const Marks = props => {
 
           attributes.position = `${attributes.x || 0} ${attributes.y || 0} ${attributes.z || 0}`;
           attributes.rotation = `${attributes.xrotation || 0} ${attributes.yrotation || 0} ${attributes.zrotation || 0}`;
+          console.log(attributes.rotation);
           const shapeScaleMark = attributes.shape ? attributes.shape : null;
 
           switch (shapeScaleMark || markShape) {
@@ -4327,7 +4352,12 @@ const Marks = props => {
                 primitive: "a-sphere",
                 className: `interactive vria-mark ${vriaid}`,
                 "data-mark": JSON.stringify(row),
-                radius: radius,
+                radius: "0.5",
+                scale: {
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                },
                 "segments-height": "9",
                 "segments-width": "18",
                 color: attributes.color,
@@ -4348,9 +4378,14 @@ const Marks = props => {
                 primitive: "a-box",
                 className: `interactive vria-mark ${vriaid}`,
                 "data-mark": JSON.stringify(row),
-                width: attributes.width || radius,
-                height: attributes.height || radius,
-                depth: attributes.depth || radius,
+                scale: {
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                },
+                width: "1",
+                height: "1",
+                depth: "1",
                 color: attributes.color,
                 initialColor: attributes.color,
                 position: attributes.position,
@@ -4369,7 +4404,12 @@ const Marks = props => {
                 primitive: "a-cone",
                 className: `interactive vria-mark ${vriaid}`,
                 "data-mark": JSON.stringify(row),
-                height: attributes.length || attributes.height || radius * 2,
+                height: "1",
+                scale: {
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                },
                 color: attributes.color,
                 initialColor: attributes.color,
                 position: attributes.position,
@@ -4377,7 +4417,7 @@ const Marks = props => {
                 "segments-height": "9",
                 "segments-radial": "18",
                 "radius-top": "0",
-                "radius-bottom": radius,
+                "radius-bottom": "0.5",
                 initialOpacity: attributes.opacity,
                 opacity: attributes.opacity,
                 events: markEvents
@@ -4392,7 +4432,12 @@ const Marks = props => {
                 primitive: "a-tetrahedron",
                 className: `interactive vria-mark ${vriaid}`,
                 "data-mark": JSON.stringify(row),
-                radius: radius,
+                radius: "1",
+                scale: {
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                },
                 color: attributes.color,
                 initialColor: attributes.color,
                 position: attributes.position,
@@ -4411,7 +4456,15 @@ const Marks = props => {
                 primitive: "a-torus",
                 className: `interactive vria-mark ${vriaid}`,
                 "data-mark": JSON.stringify(row),
-                radius: radius,
+                radius: "0.5",
+                "radius-tubular": "0.05",
+                scale: {
+                  x: attributes.width || radius,
+                  y: attributes.height || radius,
+                  z: attributes.depth || radius
+                },
+                "segments-radial": "18",
+                "segments-tubular": "16",
                 color: attributes.color,
                 initialColor: attributes.color,
                 position: attributes.position,
